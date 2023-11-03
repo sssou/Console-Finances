@@ -86,3 +86,47 @@ var finances = [
   ['Jan-2017', 138230],
   ['Feb-2017', 671099],
 ];
+
+//title
+console.log("Financial Analysis");
+console.log("------------------");
+
+//total months
+var totalMonths = finances.length
+console.log("Total Months: " + totalMonths);
+
+//net total of profs and losses
+var net = 0
+for (var i = 0; i < totalMonths; i++) {
+  net += (finances[i][1])
+}
+console.log("Total: £" + net);
+
+//adding the differences between each month
+var diffs = 0;
+for (var i = 0; i < (totalMonths - 1); i++) {
+  diffs += (finances[i+1][1] - finances[i][1])
+}
+
+// calculating the average difference between each month
+var avgdiffs = diffs / (totalMonths - 1)
+//rounding to 2 decimal places
+console.log("Average Change: " + avgdiffs.toFixed(2))
+
+//keeping track of the greatest increase and decrease between consecutive months
+var gi = (finances[1][1]-finances[0][1])
+var gd = (finances[1][1]-finances[0][1])
+for (var i = 0; i < (totalMonths - 1); i++) {
+  var inc = (finances[i+1][1] - finances[i][1])
+  if (inc > gi) {
+    gi = inc
+    var giD = finances[i+1]
+  }
+  if (inc < gd) {
+    gd = inc
+    var gdD = finances[i+1]
+  }
+}
+//logging the greatest increase/decrease and their dates
+console.log("Greatest Increase in Profits/Losses: " + giD[0] + " (£" + gi + ")")
+console.log("Greatest Decrease in Profits/Losses: " + gdD[0] + " (£" + gd + ")")
